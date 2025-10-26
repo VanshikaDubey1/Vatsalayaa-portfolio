@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vatsalya Play School - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive, sans-serif;
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFE5E5 100%);
+            overflow-x: hidden;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .shape:nth-child(2) { top: 60%; left: 80%; animation-delay: 2s; }
+        .shape:nth-child(3) { top: 40%; left: 5%; animation-delay: 4s; }
+        .shape:nth-child(4) { top: 80%; left: 70%; animation-delay: 1s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #FFD93D 0%, #FF9A3D 100%);
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(255, 153, 61, 0.3);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "⭐";
+            position: absolute;
+            font-size: 60px;
+            top: 10px;
+            left: 20px;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        header::after {
+            content: "⭐";
+            position: absolute;
+            font-size: 60px;
+            bottom: 10px;
+            right: 20px;
+            animation: twinkle 2s ease-in-out infinite 1s;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .logo-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        h1 {
+            color: #D32F2F;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .tagline {
+            color: #1976D2;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 15px 30px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-info p {
+            color: #333;
+            font-size: 1.1em;
+            margin: 5px 0;
+        }
+
+        .section {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 5px solid #FFD93D;
+            position: relative;
+        }
+
+        .section::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 30px;
+            background: #FF6B6B;
+            border-radius: 50%;
+        }
+
+        h2 {
+            color: #D32F2F;
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .class-card {
+            background: linear-gradient(135deg, #6DD5FA 0%, #2980B9 100%);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            color: white;
+        }
+
+        .class-card:nth-child(2) {
+            background: linear-gradient(135deg, #FFB6D9 0%, #FF6B9D 100%);
+        }
+
+        .class-card:nth-child(3) {
+            background: linear-gradient(135deg, #B8E994 0%, #78E08F 100%);
+        }
+
+        .class-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+        }
+
+        .class-card h3 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .class-card p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFE5E5 100%);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            border: 3px solid #FFD93D;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 217, 61, 0.4);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .feature-item h4 {
+            color: #D32F2F;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            color: #555;
+            font-size: 1em;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF9A3D 100%);
+            color: white;
+            text-align: center;
+            padding: 50px;
+            border-radius: 25px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            background: white;
+            color: #FF6B6B;
+            padding: 20px 50px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #555;
+            font-size: 1.1em;
+            margin-top: 40px;
+        }
+
+        .gallery-placeholder {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #FFD93D 0%, #FF9A3D 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            .tagline { font-size: 1.2em; }
+            .section { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape" style="font-size: 60px;">🎈</div>
+        <div class="shape" style="font-size: 60px;">🌟</div>
+        <div class="shape" style="font-size: 60px;">🎨</div>
+        <div class="shape" style="font-size: 60px;">🧸</div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width="100%" height="100%">
+                    <!-- Blue circle border -->
+                    <circle cx='150' cy='150' r='145' fill='white' stroke='#00bcd4' stroke-width='8'/>
+                    
+                    <!-- Orange cloud -->
+                    <ellipse cx='150' cy='70' rx='70' ry='22' fill='#ff9800'/>
+                    <ellipse cx='120' cy='75' rx='25' ry='20' fill='#ff9800'/>
+                    <ellipse cx='180' cy='75' rx='25' ry='20' fill='#ff9800'/>
+                    <path d='M 140 72 Q 150 68 160 72' fill='none' stroke='#333' stroke-width='2'/>
+                    <text x='150' y='73' font-size='16' fill='#ffd54f' text-anchor='middle' font-family='Arial' font-weight='bold'>ADMISSION OPEN</text>
+                    
+                    <!-- Sun rays -->
+                    <path d='M 150 105 L 145 90 L 155 90 Z' fill='#ffb300'/>
+                    <path d='M 150 105 L 163 93 L 168 102 Z' fill='#ffb300'/>
+                    <path d='M 150 105 L 175 100 L 173 110 Z' fill='#ffb300'/>
+                    <path d='M 150 105 L 180 115 L 172 122 Z' fill='#ffb300'/>
+                    <path d='M 150 105 L 137 93 L 132 102 Z' fill='#ffb300'/>
+                    <path d='M 150 105 L 125 100 L 127 110 Z' fill='#ffb300'/>
+                    <path d='M 150 105 L 120 115 L 128 122 Z' fill='#ffb300'/>
+                    
+                    <!-- Yellow sun -->
+                    <path d='M 115 130 Q 115 105 150 105 Q 185 105 185 130 Z' fill='#ffd54f'/>
+                    
+                    <!-- Child face -->
+                    <circle cx='150' cy='118' r='20' fill='#ffcba4'/>
+                    <circle cx='145' cy='115' r='2' fill='#333'/>
+                    <circle cx='155' cy='115' r='2' fill='#333'/>
+                    <path d='M 145 123 Q 150 126 155 123' fill='none' stroke='#333' stroke-width='1.5'/>
+                    
+                    <!-- Blue shirt -->
+                    <rect x='140' y='128' width='20' height='15' rx='3' fill='#2196f3'/>
+                    <path d='M 140 128 L 135 135 L 140 135' fill='#2196f3'/>
+                    <path d='M 160 128 L 165 135 L 160 135' fill='#2196f3'/>
+                    
+                    <!-- VATSALYA text -->
+                    <text x='150' y='175' font-size='38' fill='#d32f2f' text-anchor='middle' font-family='Arial' font-weight='bold'>VATSALYA</text>
+                    
+                    <!-- A Play School -->
+                    <text x='150' y='198' font-size='18' fill='#000' text-anchor='middle' font-family='Arial' font-weight='bold'>A Play School</text>
+                    
+                    <!-- Bottom arc -->
+                    <path d='M 40 230 Q 150 240 260 230' fill='none' stroke='#004d40' stroke-width='30'/>
+                    <path d='M 45 230 Q 150 239 255 230' fill='none' stroke='#00bcd4' stroke-width='3'/>
+                    
+                    <!-- Address text -->
+                    <text x='150' y='235' font-size='10' fill='white' text-anchor='middle' font-family='Arial' font-weight='bold'>485, KHUSHWAKT RAI NAGAR | 87 56 22 55 44</text>
+                </svg>
+            </div>
+            <script>
+                // Try to load uploaded image
+                (async () => {
+                    const possibleFilenames = [
+                        'WhatsApp Image 2025-10-25 at 21.21.42_e85e3f73.jpg',
+                        'image.jpg', 'logo.jpg', 'vatsalya.jpg'
+                    ];
+                    
+                    for (const filename of possibleFilenames) {
+                        try {
+                            const logoData = await window.fs.readFile(filename);
+                            const blob = new Blob([logoData], { type: 'image/jpeg' });
+                            const url = URL.createObjectURL(blob);
+                            const imgEl = document.createElement('img');
+                            imgEl.src = url;
+                            imgEl.style.width = '100%';
+                            imgEl.style.height = '100%';
+                            imgEl.style.objectFit = 'contain';
+                            document.querySelector('.logo-container').innerHTML = '';
+                            document.querySelector('.logo-container').appendChild(imgEl);
+                            break;
+                        } catch (error) {
+                            continue;
+                        }
+                    }
+                })();
+            </script>
+            <h1>VATSALYA</h1>
+            <p class="tagline">A Play School Where Learning is Fun!</p>
+            <div class="contact-info">
+                <p>📍 485, Khushwakt Rai Nagar</p>
+                <p>📞 87 56 22 55 44</p>
+                <p style="color: #D32F2F; font-weight: bold; font-size: 1.3em;">🎉 ADMISSION OPEN 🎉</p>
+            </div>
+        </header>
+
+        <div class="section">
+            <h2>🎓 Our Classes</h2>
+            <div class="classes-grid">
+                <div class="class-card">
+                    <h3>🐣 Play Group</h3>
+                    <p><strong>Age:</strong> 2-3 years</p>
+                    <p>First steps into learning with play-based activities, sensory exploration, and social interaction!</p>
+                </div>
+                <div class="class-card">
+                    <h3>🌈 Nursery</h3>
+                    <p><strong>Age:</strong> 3-4 years</p>
+                    <p>Building foundations through stories, songs, art, and creative activities in a nurturing environment!</p>
+                </div>
+                <div class="class-card">
+                    <h3>🎨 Class 1</h3>
+                    <p><strong>Age:</strong> 5-6 years</p>
+                    <p>Preparing for primary school with structured learning, reading, writing, and problem-solving skills!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>✨ Why Choose Vatsalya?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">👩‍🏫</div>
+                    <h4>Caring Teachers</h4>
+                    <p>Experienced and loving educators dedicated to your child</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎮</div>
+                    <h4>Play-Based Learning</h4>
+                    <p>Learning through fun activities and games</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🏰</div>
+                    <h4>Safe Environment</h4>
+                    <p>Child-friendly facilities with complete safety measures</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎭</div>
+                    <h4>Creative Activities</h4>
+                    <p>Art, music, dance, and storytelling every day</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🧩</div>
+                    <h4>Holistic Development</h4>
+                    <p>Focus on mental, physical, and emotional growth</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👪</div>
+                    <h4>Parent Partnership</h4>
+                    <p>Regular updates and parent-teacher meetings</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🌟 Our Happy Moments</h2>
+            <p style="text-align: center; font-size: 1.2em; color: #555; margin-bottom: 20px;">
+                Every day at Vatsalya is filled with laughter, learning, and unforgettable memories! Our little stars engage in creative arts and crafts, enjoy story time adventures, dance to their favorite tunes, participate in fun sports activities, celebrate colorful festivals, and put on amazing performances. We capture these precious moments as your children grow, explore, and shine bright!
+            </p>
+            <div class="gallery-placeholder">
+                <div class="gallery-item">🎨</div>
+                <div class="gallery-item">📚</div>
+                <div class="gallery-item">🎵</div>
+                <div class="gallery-item">🏃</div>
+                <div class="gallery-item">🎭</div>
+                <div class="gallery-item">🎪</div>
+                <div class="gallery-item">🎉</div>
+                <div class="gallery-item">🌈</div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>🎉 Join the Vatsalya Family Today! 🎉</h2>
+            <p style="font-size: 1.3em; margin-bottom: 30px;">Give your child the best start to their learning journey!</p>
+            <button class="cta-button" onclick="window.location.href='tel:8756225544'">📞 Contact Us</button>
+            <button class="cta-button" onclick="window.open('https://www.google.com/maps/search/?api=1&query=485+Khushwakt+Rai+Nagar+Fatehpur+UP+212601', '_blank')">🏫 Visit School</button>
+        </div>
+
+        <footer>
+            <p>🌈 Vatsalya - Where Every Child Shines Bright! 🌟</p>
+            <p>© 2025 Vatsalya Play School. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
